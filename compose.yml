@@ -1,0 +1,38 @@
+services:
+  backend:
+    container_name: adapter-backend
+    build:
+      dockerfile: Dockerfile
+      context: ./server
+      args:
+        - DATABASE_URL=postgres://acha:acha@db:5432/adapter
+    networks:
+      - adapter-net
+  db:
+    image: postgres:latest
+    container_name: adapter-db
+    environment:
+      POSTGRES_DB: adapter
+      POSTGRES_USER: acha
+      POSTGRES_PASSWORD: acha
+    volumes:
+      - ./database/seed:/docker-entrypoint-initdb.d
+      - ./database/data:/var/lib/postgresql
+    networks:
+      - adapter-net
+    
+  client-adapter-acha:
+    image: client-adapter-acha
+    container_name: "client-adapter-acha"
+    build:
+      context: ./client
+      args:
+        - DATABASE_URL=postgres://acha:acha@db:5432/adapter
+        - REST_URL=http://backend:9990
+        - ADAPTER="psql"
+    networks:
+      - adapter-net
+
+networks:
+  adapter-net:
+    driver: bridge

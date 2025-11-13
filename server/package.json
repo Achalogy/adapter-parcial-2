@@ -1,0 +1,23 @@
+{
+  "name": "server",
+  "module": "index.ts",
+  "type": "module",
+  "private": true,
+  "devDependencies": {
+    "@types/bun": "latest",
+    "prisma": "^6.19.0"
+  },
+  "peerDependencies": {
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.19.0",
+    "chalk": "^5.6.2",
+    "elysia": "^1.4.16",
+    "figlet": "^1.9.3",
+    "zod": "^4.1.12"
+  },
+  "scripts": {
+    "start": "bun index.ts"
+  }
+}
