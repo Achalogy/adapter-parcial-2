@@ -2,16 +2,9 @@
 
 ```
 docker compose up -d --build
-docker compose run --rm -it client-adapter-acha
+docker compose run --rm -it client-adapter-acha -a psql   # Postgresql
+docker compose run --rm -it client-adapter-acha -a rest   # REST Api
 ```
-
-Cambiar el adapter en `compose.yml` linea 32 y volver a ejecutar
-
-```
-docker compose up -d --build
-docker compose run --rm -it client-adapter-acha
-```
-
 
 # Acceder a la db
 
